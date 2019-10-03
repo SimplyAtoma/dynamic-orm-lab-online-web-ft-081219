@@ -53,7 +53,12 @@ def self.find_by_name(name)
 end
 
 def self.find_by(hash)
-  sql = "SELECT * FROM #{self.table_name} WHERE name = ?"
-  DB[:conn].execute(sql, hash[:name])
+  if hash[:grade]
+    sql = "SELECT * FROM #{self.table_name} WHERE grade = ?"
+    DB[:conn].execute(sql, hash[:grade])
+  else 
+    sql = "SELECT * FROM #{self.table_name} WHERE name = ?"
+    DB[:conn].execute(sql, hash[:name])
+  end 
 end
 end
